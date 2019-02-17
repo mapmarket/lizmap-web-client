@@ -48,6 +48,8 @@ class myHtmlResponse extends jResponseHtml {
     $this->addJSLink($bp.'js/jquery-ui-1.11.2.custom.min.js');
     $this->addJSLink($bp.'js/bootstrap.js');
 
+	$this->addHeadContent('<script src="//cdn.rawgit.com/saribe/eModal/1.2.67/dist/eModal.min.js"></script>');
+
   }
 
   protected function doAfterActions() {

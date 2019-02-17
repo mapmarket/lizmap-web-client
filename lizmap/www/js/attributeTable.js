@@ -2850,6 +2850,13 @@ var lizAttributeTable = function() {
                             }
                         }
 
+                        // Edit button MapMarket
+                        if (self.next('span.popupButtonBar').find('button.popup-layer-feature-edit').length == 0) {
+                            eHtml += '<button class="btn btn-mini popup-layer-feature-edit"';
+                            eHtml += ' value="' + aConfig[0] + '.' + fid + '"';
+                            eHtml += ' title="' + lizDict['attributeLayers.btn.edit.title'] + '"><i class="icon-pencil"></i>&nbsp;</button>';
+                        }
+
                         // Zoom button
                         var popupButtonBar = self.next('span.popupButtonBar');
                         var bboxZoomButton = popupButtonBar.find('button.popup-layer-feature-zoom');
@@ -2912,6 +2919,42 @@ var lizAttributeTable = function() {
                         .hover(
                             function(){ $(this).addClass('btn-primary'); },
                             function(){ $(this).removeClass('btn-primary'); }
+                        );
+
+                        // Edit MapMarket
+                        $('div.lizmapPopupContent button.popup-layer-feature-edit')
+                            .unbind('click')
+                            .click(function () {
+                                var fid = $(this).val().split('.').pop();
+                                var featureType = $(this).val().replace('.' + fid, '');
+
+                                // Remove map popup to avoid confusion
+                                if (lizMap.map.popups.length != 0)
+                                    lizMap.map.removePopup(lizMap.map.popups[0]);
+
+                                // Open modal with iframe 
+                                // http://localhost:57501/Etablissements/Edit?id=fid
+
+                                //var lizmapModal = $('#lizmap-modal');
+
+                                //var modal_html = '<div class="modal-dialog modal-lg">'
+                                //modal_html += '<div class="modal-content">';
+                                //modal_html += '<iframe src="http://localhost:57501/Etablissements/Edit?id=' + fid + '" frameborder="0" width="100%" class="myIframe"></iframe>';
+                                //modal_html += '</div>';
+                                //modal_html += '</div>';
+                                ////lizmapModal.addClass('modal-fill-in');
+                                //lizmapModal.html(modal_html).modal('show');
+
+                                eModal.iframe('http://localhost:57501/Etablissements/Edit?id=' + fid, 'Edit form');
+
+                                //eModal.ajax('http://localhost:57501/Etablissements/Edit?id=' + fid, 'Edit form')
+                                //    .then(ajaxOnLoadCallback);
+
+                                return false;
+                            })
+                            .hover(
+                                function () { $(this).addClass('btn-primary'); },
+                                function () { $(this).removeClass('btn-primary'); }
                         );
 
                         // Zoom

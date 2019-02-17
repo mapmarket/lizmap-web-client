@@ -66,6 +66,7 @@ class myHtmlMapResponse extends jResponseHtml {
     $this->addJSLink($bp.'js/jquery.dataTables.bootstrap.js');
     $this->addJSLink($bp.'js/map.js');
 
+	$this->addHeadContent('<script src="//cdn.rawgit.com/saribe/eModal/1.2.67/dist/eModal.min.js"></script>');
 
     $generalJSConfig = '
       Proj4js.libPath = "'.$bp.'Proj4js/";
